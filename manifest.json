@@ -10,12 +10,12 @@
     "theme_color": "#E50914",
     "icons": [
         {
-            "src": "/NetflixTop10Global_PWA/asserts/icon-192.png",
+            "src": "/NetflixTop10Global_PWA/asserts/N_logo192.png",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "/NetflixTop10Global_PWA/asserts/icon-512.png",
+            "src": "/NetflixTop10Global_PWA/asserts/N_logo512.png",
             "sizes": "512x512",
             "type": "image/png"
         }

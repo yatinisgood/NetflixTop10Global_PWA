@@ -10,8 +10,8 @@ const CORE_ASSETS = [
     `${REPO_NAME}/script.js`,
     `${REPO_NAME}/asserts/Netflix_Logo.png`,
     `${REPO_NAME}/asserts/top10.svg`,
-    `${REPO_NAME}/asserts/N_logo192.svg`,
-    `${REPO_NAME}/asserts/N_logo512.svg`,
+    `${REPO_NAME}/asserts/N_logo192.png`,
+    `${REPO_NAME}/asserts/N_logo512.png`,
     `${REPO_NAME}/file_manifest.json`
 ];
 

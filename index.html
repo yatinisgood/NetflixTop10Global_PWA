@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- PWA 修改 -->
+    <meta name="theme-color" content="#E50914"/>
+    <!-- 修正路徑 -->
+    <link rel="manifest" href="/NetflixTop10Global_PWA/manifest.json">
+    <link rel="apple-touch-icon" href="/NetflixTop10Global_PWA/asserts/icon-192.png">
+    
+    <title>Netflix Global TOP 10 Weekly</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="main-header">
+        <img src="asserts/Netflix_Logo.png" alt="Netflix Logo" class="netflix-logo">
+    </header>
+    <div class="selector-container">
+        <img src="asserts/top10.svg" alt="Top 10" class="top10-logo">
+        <div class="custom-select-wrapper">
+            <div class="custom-select" id="date-dropdown-container">
+                <div class="custom-select__trigger">
+                    <span id="selected-date">Select a week</span>
+                    <div class="arrow"></div>
+                </div>
+                <div class="custom-options" id="date-options">
+                    <!-- Options will be populated by script.js -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main id="app-container">
+        <!-- Movie shelves will be dynamically inserted here -->
+    </main>
+
+    <script src="script.js"></script>
+
+    <!-- PWA 修改：註冊 Service Worker -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                // 修正路徑
+                navigator.serviceWorker.register('/NetflixTop10Global_PWA/sw.js')
+                    .then(registration => {
+                        console.log('Service Worker registered with scope:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.error('Service Worker registration failed:', error);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>

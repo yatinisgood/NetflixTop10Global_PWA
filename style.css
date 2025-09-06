@@ -1,0 +1,285 @@
+/* --- Header --- */
+.main-header {
+    padding: 1rem 2rem;
+}
+
+.netflix-logo {
+    height: 45px;
+}
+
+/* --- 全域設定 --- */
+body {
+    background-color: #141414;
+    color: #e5e5e5;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+/* --- 下拉式選單容器 --- */
+.selector-container {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Added */
+    padding: 1rem 0;
+}
+
+.top10-logo {
+    height: 50px; /* Adjust as needed */
+    margin-right: 10px;
+}
+
+#json-selector {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #555;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+#json-selector:hover {
+    background-color: #444;
+}
+
+#json-selector:focus {
+    outline: none;
+    border-color: #777;
+}
+
+/* --- 主要區塊 --- */
+.anime-section {
+    /* 增加下方空間，避免彈出的海報跟下一列標題打架 */
+    margin-bottom: 0.8rem; /* 調整為標題高度的一半 */
+}
+
+.section-title {
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-bottom: 0.1rem;
+    padding: 0 1%;
+}
+
+/* --- ���架容器 --- */
+.anime-shelf {
+    display: flex;
+    gap: 0.5vw; /* 縮小間距 */
+    padding: 0 5%;
+}
+
+/* --- 單一影片項目 (作為佔位符) --- */
+.anime-item {
+    position: relative; /* 為了讓 poster-container 能絕對定位 */
+    cursor: pointer;
+    flex-shrink: 0;
+    width: 8.55vw; /* 加寬海報以填滿空間 */
+    /* 關鍵：給佔位符一個固定的長寬比，防止整列崩塌 */
+    aspect-ratio: 2 / 3;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* --- 海報容器 (實際顯示與互動的元素) --- */
+.poster-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #222;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transform-origin: center; /* 確保縮放從中心點開始 */
+}
+
+/* --- 海報圖片 --- */
+.poster-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* --- 標題遮罩 --- */
+.title-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 2;
+}
+
+.rank-number {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-bottom-right-radius: 8px;
+    z-index: 3;
+}
+
+/* --- 影片標題 --- */
+.anime-title {
+    color: #fff;
+    font-size: 1em;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.anime-details {
+    
+    color: #b0b0b0;
+    font-size: 0.8em;
+    margin-top: 1rem;
+    /*white-space: nowrap;*/
+}
+
+/* --- 懸停效果 --- */
+
+.anime-item {
+    z-index: 1;
+}
+
+.anime-item:hover {
+    z-index: 10; /* 讓被懸停的項目在最上層 */
+}
+
+/* 懸停時，彈出的海報容器的樣式 */
+.anime-item:hover .poster-container {
+    /* 關鍵：設定明確的寬度與長寬比，取代 scale */
+    width: 16vw;
+    aspect-ratio: 16 / 9;
+    
+    /* 關鍵：將海報垂直置中於原卡片位置 */
+    top: 50%;
+    /* 關鍵：從中心展開 */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    border: 4px solid orange;
+}
+
+/* 懸停時顯示遮罩 */
+.anime-item:hover .title-overlay {
+    opacity: 1;
+}
+
+/* --- 響應式設計 --- */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 1.2rem;
+    }
+
+    .anime-item {
+        width: 22vw; /* 在平板上顯示較大的海報 */
+    }
+
+    .anime-item:hover .poster-container {
+        width: 44vw; /* 懸停時放大更多 */
+    }
+}
+
+@media (max-width: 480px) {
+    .section-title {
+        font-size: 1rem;
+    }
+
+    .anime-item {
+        width: 30vw; /* 在手機上顯示更大的海報 */
+    }
+
+    .anime-item:hover .poster-container {
+        width: 60vw; /* 懸停時放大更多 */
+    }
+}
+
+/* Custom Select (Dark Theme) */
+.custom-select-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 250px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.custom-select {
+    position: relative;
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #555;
+    border-radius: 30px;
+}
+
+.custom-select__trigger {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.custom-select.open {
+    border-radius: 30px 30px 0 0;
+}
+
+.arrow {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #fff;
+    transition: transform 0.3s ease;
+}
+
+.custom-select.open .arrow {
+    transform: rotate(180deg);
+}
+
+.custom-options {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #333;
+    border: 1px solid #555;
+    border-top: 0;
+    border-radius: 0 0 30px 30px;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 10;
+}
+
+.custom-select.open .custom-options {
+    display: block;
+}
+
+.custom-option {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    color: #fff;
+}
+
+.custom-option:hover {
+    background-color: #444;
+}
+
+.custom-option.selected {
+    background-color: #555;
+    font-weight: bold;
+}
